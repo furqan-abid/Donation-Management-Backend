@@ -1,6 +1,7 @@
-const App = require("./app");
-const { config } = require("dotenv");
-const ConnectDatabase = require("./config/database");
+import app from "./app";
+import { config } from "dotenv"
+import connectDatabase from "./config/database";
+
 
 const path = 'config/config.env';
 config({ path });
@@ -12,9 +13,9 @@ process.on('uncaughtException', function (err) {
     process.exit(1);
 });
 
-ConnectDatabase();
+connectDatabase()
 
-const server = App.listen(process.env.Port, () => {
+const server = app.listen(process.env.Port, () => {
     console.log(`Server is running on ${process.env.Port}`);
 });
 

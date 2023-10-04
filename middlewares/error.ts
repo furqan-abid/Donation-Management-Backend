@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
+import ErrorHandler from '../utlis/errorHandler'
 
-const ErrorHandler = require ('../utlis/ErrorHandler')
-
-module.exports = (err:any, req:Request, res:Response, next:NextFunction) => {
+export default (err:any, req:Request, res:Response, next:NextFunction) => {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
   

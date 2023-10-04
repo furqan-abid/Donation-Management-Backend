@@ -1,5 +1,5 @@
-const express = require('express');
-const cors = require('cors');
+import cors from 'cors'
+import express from 'express'
 
 const app = express();
 
@@ -14,4 +14,4 @@ app.use(
 );
 console.log("working 2");
 
-module.exports = app;
+export default app;
