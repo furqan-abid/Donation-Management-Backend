@@ -1,13 +1,5 @@
-import mongoose,{Document,model,Schema} from "mongoose";
-
-interface Tstudent extends Document {
-    name:string,
-    email:string,
-    department:string,
-    smester:number,
-    section:string,
-    balance:number,
-}
+import {model,Schema} from "mongoose";
+import { Tstudent } from "../types/Models";
 
 const studenSchema = new Schema<Tstudent>({
     name:{
@@ -31,8 +23,29 @@ const studenSchema = new Schema<Tstudent>({
         type:String,
         required:true
     },
-    balance:{
-        type: Number,
+    fatherName:{
+        type:String,
+        required:true
+    },
+    fatherOcuupation:{
+        type:String,
+        required:true
+    },
+    fatherPhone:{
+        type:Number,
+        required:true
+    },
+    financialNeed:{
+        type:Number,
+        default:0
+    },
+    financialType:{
+        type:String,
+        enum:['Loan','Donation'],
+        required:true
+    },
+    loanReturned:{
+        type:Number,
         default:0
     }
 })
