@@ -1,11 +1,8 @@
 import app from "./app";
-import { config } from "dotenv"
+import dotenv from "dotenv"
 import connectDatabase from "./config/database";
 
-
-const path = 'config/config.env';
-config({ path });
-
+dotenv.config({path:'config/config.env'})
 // Handling uncaught exceptions
 process.on('uncaughtException', function (err) {
     console.log("Error: " + err.message);
