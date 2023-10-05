@@ -20,3 +20,14 @@ export interface Tinvestor extends Document {
     fundsContributed:number,
     dateJoined:string
 }
+
+export interface Tteacher extends Document{
+    name:string,
+    department: string,
+    email:string,
+    password:string,
+}
+
+export interface Tbalance extends Document {
+    totalBalance:number
+}

@@ -1,6 +1,8 @@
 import cors from 'cors'
 import express from 'express'
 import ErrorMiddleware from './middlewares/error';
+import userRoutes from './routes/userRoutes'
+import morgan from 'morgan'
 
 const app = express();
 
@@ -13,7 +15,9 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-console.log("working 2");
+app.use(morgan('dev'))
+
+app.use('/api/v1',userRoutes)
 
 app.use(ErrorMiddleware)
 export default app;

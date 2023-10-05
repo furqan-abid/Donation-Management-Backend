@@ -1,4 +1,4 @@
-class errorHandler extends Error{
+class ErrorHandler extends Error{
     public statusCode:number;
     constructor(message:string,statusCode:number){
         super(message);
@@ -8,4 +8,4 @@ class errorHandler extends Error{
     }
 }
 
-export default errorHandler
+export default ErrorHandler
