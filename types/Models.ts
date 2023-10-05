@@ -26,6 +26,8 @@ export interface Tteacher extends Document{
     department: string,
     email:string,
     password:string,
+    token:string,
+    validatePassword(password:string):Promise<boolean>
 }
 
 export interface Tbalance extends Document {

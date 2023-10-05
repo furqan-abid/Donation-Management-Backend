@@ -18,6 +18,9 @@ const teacherSchema = new Schema<Tteacher>({
     password:{
         type:String,
         required:true
+    },
+    token:{
+      type:String,
     }
 })
 
