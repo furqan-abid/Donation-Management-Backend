@@ -42,3 +42,11 @@ export const registerUser = catchAsyncError(async(req,res,next)=>{
         user
     })
 })
+
+export const getAllUsers = catchAsyncError(async (req,res,next)=>{
+    const users = await teacherModel.find()
+    res.status(200).json({
+        success : true ,
+        users
+    })
+})
