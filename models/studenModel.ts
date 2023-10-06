@@ -4,7 +4,7 @@ import { Tstudent } from "../types/Models";
 const studenSchema = new Schema<Tstudent>({
     name:{
         type: String,
-        required:true
+        required:[true,"name is required"],
     },
     email:{
         type:String,
@@ -41,7 +41,7 @@ const studenSchema = new Schema<Tstudent>({
     },
     financialType:{
         type:String,
-        enum:['Loan','Donation'],
+        enum:['loan','donation'],
         required:true
     },
     loanReturned:{

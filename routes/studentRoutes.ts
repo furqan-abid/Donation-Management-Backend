@@ -5,6 +5,6 @@ const router = express.Router()
 
 
 router.route("/student/all").get(getAllStudents)
-router.route("/student/grant/donation").post(grantStudentDonation)
+router.route("/student/grantdonation").post(grantStudentDonation)
 
 export default router
