@@ -14,6 +14,17 @@ export const getAllStudents = catchAsyncError(async (req, res, next) => {
   });
 });
 
+export const getSingleStudent = catchAsyncError(async (req, res, next) => {
+    const student = await studenModel.findById(req.params.id).select("-loanReturned");
+    if (!student) {
+      return next(new ErrorHandler("no student found", 404));
+    }
+    res.status(200).json({
+      success: true,
+      student,
+    });
+  });
+
 export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
   const {
     name,
