@@ -2,6 +2,9 @@ import cors from 'cors'
 import express from 'express'
 import ErrorMiddleware from './middlewares/error';
 import userRoutes from './routes/userRoutes'
+import studentRoutes from './routes/studentRoutes'
+import balanceRoutes from './routes/balanceRoutes'
+
 import morgan from 'morgan'
 
 const app = express();
@@ -18,6 +21,8 @@ app.use(
 app.use(morgan('dev'))
 
 app.use('/api/v1',userRoutes)
+app.use('/api/v1',studentRoutes)
+app.use('/api/v1',balanceRoutes)
 
 app.use(ErrorMiddleware)
 export default app;
