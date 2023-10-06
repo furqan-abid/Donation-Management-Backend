@@ -29,7 +29,7 @@ export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
     financialType,
   } = req.body;
   
-  const missingFields = [];
+  const missingFields:(string|number)[] = [];
 
   for (const field in req.body) {
     if (!req.body[field]) {

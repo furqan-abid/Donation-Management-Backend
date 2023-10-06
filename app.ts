@@ -4,6 +4,7 @@ import ErrorMiddleware from './middlewares/error';
 import userRoutes from './routes/userRoutes'
 import studentRoutes from './routes/studentRoutes'
 import balanceRoutes from './routes/balanceRoutes'
+import investorRoutes from './routes/investorRoutes'
 
 import morgan from 'morgan'
 
@@ -23,6 +24,7 @@ app.use(morgan('dev'))
 app.use('/api/v1',userRoutes)
 app.use('/api/v1',studentRoutes)
 app.use('/api/v1',balanceRoutes)
+app.use('/api/v1',investorRoutes)
 
 app.use(ErrorMiddleware)
 export default app;
