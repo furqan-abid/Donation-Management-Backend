@@ -47,7 +47,7 @@ Before getting started, ensure you have the following installed on your system:
 
 1. Clone the repo, install NPM packages, configure environment variables, and start the server:
    ```sh
-   git clone https://github.com/furqan-abid/Donation-Management.git
+   git clone https://github.com/furqan-abid/Donation-Management-Backend.git
    npm install
    # Create a .env file in the root directory and add the following:
    # DB_URI=your_mongodb_uri
