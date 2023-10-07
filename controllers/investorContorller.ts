@@ -66,3 +66,12 @@ export const getsingleInvestor = catchAsyncError(async (req,res,next)=>{
         Investor
     })
 })
+
+export const deleteInvestor = catchAsyncError(async (req,res,next)=>{
+    const deletedInvestor=await investorModel.deleteOne({"_id": req.params._id });
+    res.status(200).json({
+        success:true,
+        message:"investor deleted successfully",
+        deletedInvestor
+    })
+})
