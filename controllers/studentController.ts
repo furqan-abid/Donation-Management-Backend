@@ -55,9 +55,8 @@ export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
   }
 
   const balance = await balanceModel.findOne({});
+
   if (balance?.totalBalance && balance?.totalBalance > financialNeed) {
-    balance.totalBalance -= financialNeed
-    await balance.save()
     const newstudent = await studenModel.create({
       name,
       email,
@@ -76,6 +75,8 @@ export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
       message: "donation granted successfully",
       newstudent,
     });
+    balance.totalBalance -= financialNeed
+    await balance.save()
   } else {
     return next(
       new ErrorHandler(
@@ -87,3 +88,38 @@ export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
     );
   }
 });
+
+
+export const deleteStudent = catchAsyncError(async (req,res,next)=>{
+  const deletedInvestor=await studenModel.findByIdAndDelete(req.params._id );
+  res.status(200).json({
+      success:true,
+      message:"investor deleted successfully",
+      deletedInvestor
+  })
+})
+
+export const returnLoan = catchAsyncError(async (req,res,next)=>{
+  let returnedAmount:number = req.body.amount
+  let student = await studenModel.findById(req.params.id).select("+loanReturned");
+  let balance = await balanceModel.findOne({})
+  if(!student){
+    return next(new ErrorHandler("Student not found",404))
+  }
+  if(student.financialType!=="loan"){
+    return next(new ErrorHandler("Financial type is not loan",403))
+  }
+  if(student.financialNeed<(student!.loanReturned+returnedAmount)){
+    return next(new ErrorHandler(`Returned loan is more than financial need your remaining loan is ${student.financialNeed-student.loanReturned}`,403))
+  }
+
+  student.loanReturned += returnedAmount
+  student.save()
+  balance!.totalBalance += returnedAmount
+  balance!.save()
+  res.status(200).json({
+    success:true,
+    message:`loan return successfully remaining loan is ${student.financialNeed-returnedAmount}`,
+})
+
+})

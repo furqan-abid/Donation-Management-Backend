@@ -46,7 +46,8 @@ const studenSchema = new Schema<Tstudent>({
     },
     loanReturned:{
         type:Number,
-        default:0
+        default:0,
+        select:false
     }
 })
 

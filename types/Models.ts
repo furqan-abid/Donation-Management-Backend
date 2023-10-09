@@ -12,6 +12,7 @@ export interface Tstudent extends Document {
     fatherPhone:number,
     financialNeed:number,
     financialType:string,
+    totalLoan:number,
     loanReturned:number
 }
 
