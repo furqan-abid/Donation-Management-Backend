@@ -1,10 +1,10 @@
 import catchAsyncError from "../middlewares/catchAsyncError";
 import balanceModel from "../models/balanceModel";
-import studenModel from "../models/studenModel";
+import studentModel from "../models/studenModel";
 import ErrorHandler from "../utlis/errorHandler";
 
 export const getAllStudents = catchAsyncError(async (req, res, next) => {
-  const students = await studenModel.find().select("-loanReturned");
+  const students = await studentModel.find().select("-loanReturned");
   if (!students) {
     return next(new ErrorHandler("no student found", 404));
   }
@@ -15,7 +15,7 @@ export const getAllStudents = catchAsyncError(async (req, res, next) => {
 });
 
 export const getSingleStudent = catchAsyncError(async (req, res, next) => {
-    const student = await studenModel.findById(req.params.id).select("-loanReturned");
+    const student = await studentModel.findById(req.params.id).select("-loanReturned");
     if (!student) {
       return next(new ErrorHandler("no student found", 404));
     }
@@ -57,7 +57,7 @@ export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
   const balance = await balanceModel.findOne({});
 
   if (balance?.totalBalance && balance?.totalBalance > financialNeed) {
-    const newstudent = await studenModel.create({
+    const newstudent = await studentModel.create({
       name,
       email,
       department,
@@ -91,17 +91,21 @@ export const grantStudentDonation = catchAsyncError(async (req, res, next) => {
 
 
 export const deleteStudent = catchAsyncError(async (req,res,next)=>{
-  const deletedInvestor=await studenModel.findByIdAndDelete(req.params._id );
-  res.status(200).json({
-      success:true,
-      message:"investor deleted successfully",
-      deletedInvestor
-  })
+  console.log(req.params.id);
+  let student = await studentModel.findByIdAndDelete(req.params.id);
+
+if(!student){
+  return next(new ErrorHandler("No student found with this id",404))
+}
+    res.status(200).json({
+      success: true,
+      message: "Student deleted successfully",
+    });
 })
 
 export const returnLoan = catchAsyncError(async (req,res,next)=>{
   let returnedAmount:number = req.body.amount
-  let student = await studenModel.findById(req.params.id).select("+loanReturned");
+  let student = await studentModel.findById(req.params.id).select("+loanReturned");
   let balance = await balanceModel.findOne({})
   if(!student){
     return next(new ErrorHandler("Student not found",404))
